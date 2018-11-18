@@ -4,6 +4,12 @@
 class Prototype
 {
   public:
+    /*
+     * Default Constructor
+     *
+     */
+    Prototype();
+
     /* Constructor which takes in the following values
      *
      * param: buttonPin

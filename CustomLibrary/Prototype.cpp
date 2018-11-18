@@ -1,4 +1,9 @@
+#include <Arduino.h>
 #include "Prototype.h"
+
+Prototype::Prototype()
+{
+}
 
 Prototype::Prototype(
   int buttonPin,
