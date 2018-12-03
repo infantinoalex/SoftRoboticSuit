@@ -12,6 +12,7 @@
 
 MPU6050 mpu;
 
+int accelerometerLEDPin = 6;
 int startButtonPin = 4;
 int startButtonLEDPin = 5;
 
@@ -56,6 +57,7 @@ void dmpDataReady() {
 
 Button startButton;
 LED startButtonLED;
+LED accelerometerLED;
 Solenoid solenoid;
 
 void setup() 
@@ -63,6 +65,8 @@ void setup()
   startButton = Button(startButtonPin);
   startButtonLED = LED(startButtonLEDPin);
 
+  accelerometerLED = LED(accelerometerLEDPin);
+  
   solenoid = Solenoid(solenoidPin);
   
       // join I2C bus (I2Cdev library doesn't do this automatically)
@@ -156,6 +160,7 @@ void loop()
       solenoid.CloseSolenoid();
       isStartButtonPressed = 0;
       startButtonLED.TurnOffLED();
+      accelerometerLED.TurnOffLED();
       accelerometerTriggered = false;
     }
   }
@@ -207,6 +212,7 @@ void loop()
     if (startButton.IsButtonPressed())
     {
       isStartButtonPressed = true;
+      accelerometerLED.TurnOnLED();
     }
     else if (isStartButtonPressed)
     {
