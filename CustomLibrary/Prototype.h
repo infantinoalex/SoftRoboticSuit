@@ -4,6 +4,10 @@
 #include "Button.h"
 #include "Solenoid.h"
 #include "LED.h"
+#include "I2Cdev.h"
+
+#include "MPU6050_6Axis_MotionApps20.h"
+
 
 class Prototype
 {
@@ -35,6 +39,8 @@ class Prototype
     int isStartButtonPressed; // int to indicate if it has been started
 
     Solenoid solenoid;  // The solenoid to send air into the vest
+
+    MPU6050 MPU;  // The accelerometer
 
     // Resets the state of the suit
     void ResetState();
