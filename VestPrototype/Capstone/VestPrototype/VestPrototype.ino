@@ -1,6 +1,7 @@
+#include <SoftwareSerial.h>
+
 #include <Button.h>
 #include <LED.h>
-#include <Prototype.h>
 #include <Solenoid.h>
 
 #include "I2Cdev.h"
@@ -16,7 +17,7 @@ int accelerometerLEDPin = 6;
 int startButtonPin = 4;
 int startButtonLEDPin = 5;
 
-int solenoidPin = 9;
+int solenoidPin = 11;
 
 bool isStartButtonPressed = false;
 bool accelerometerTriggered = false;
@@ -98,10 +99,10 @@ void setup()
     Serial.println(mpu.testConnection() ? F("MPU6050 connection successful") : F("MPU6050 connection failed"));
 
     // wait for ready
-    Serial.println(F("\nSend any character to begin DMP programming and demo: "));
-    while (Serial.available() && Serial.read()); // empty buffer
-    while (!Serial.available());                 // wait for data
-    while (Serial.available() && Serial.read()); // empty buffer again
+    //Serial.println(F("\nSend any character to begin DMP programming and demo: "));
+    //while (Serial.available() && Serial.read()); // empty buffer
+    //while (!Serial.available());                 // wait for data
+    //while (Serial.available() && Serial.read()); // empty buffer again
 
     // load and configure the DMP
     Serial.println(F("Initializing DMP..."));
@@ -152,17 +153,6 @@ void loop()
   // wait for MPU interrupt or extra packet(s) available
   while (!mpuInterrupt && fifoCount < packetSize) 
   {
-    if (accelerometerTriggered)
-    {
-      startButtonLED.TurnOnLED();
-      solenoid.OpenSolenoid();
-      delay(2000);
-      solenoid.CloseSolenoid();
-      isStartButtonPressed = 0;
-      startButtonLED.TurnOffLED();
-      accelerometerLED.TurnOffLED();
-      accelerometerTriggered = false;
-    }
   }
 
   // reset interrupt flag and get INT_STATUS byte
@@ -219,6 +209,18 @@ void loop()
       if (pitch >= 80.0)
       {
         accelerometerTriggered = true;
+      }
+      
+      if (accelerometerTriggered)
+      {
+        solenoid.OpenSolenoid();
+        startButtonLED.TurnOnLED();
+        delay(5000);
+        solenoid.CloseSolenoid();
+        isStartButtonPressed = false;
+        startButtonLED.TurnOffLED();
+        accelerometerLED.TurnOffLED();
+        accelerometerTriggered = false;
       }
     }
 

@@ -15,22 +15,12 @@ Solenoid::Solenoid(int solenoidPin)
 
 void Solenoid::OpenSolenoid()
 {
-    if (this->isOpen)
-    {
-        return;
-    }
-
     digitalWrite(this->solenoidPin, HIGH);
     this->isOpen = 1;
 }
 
 void Solenoid::CloseSolenoid()
 {
-    if (!this->isOpen)
-    {
-        return;
-    }
-
     digitalWrite(this->solenoidPin, LOW);
     this->isOpen = 0;
 }
