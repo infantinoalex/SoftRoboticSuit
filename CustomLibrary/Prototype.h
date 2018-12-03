@@ -20,15 +20,9 @@ class Prototype
     // param: startButtonLED
     //        LED to indicate if the start button has been pressed
     //
-    // param: emergencyButton
-    //        Button to reset the device
-    //
-    // param: intakeSolenoid
+    // param: solenoid
     //        Solenoid to send air into the vest
-    //
-    // param: outakeSolenoid
-    //        Solenoid to send air out of the vest
-    Prototype(Button startButton, LED startButtonLED, Button emergencyButton, Solenoid intakeSolenoid, Solenoid outtakeSolenoid);
+    Prototype(Button startButton, LED startButtonLED, Solenoid solenoid);
     
     // Main control looop for the vest
     void ControlLoop();
@@ -40,12 +34,8 @@ class Prototype
 
     int isStartButtonPressed; // int to indicate if it has been started
 
-    Button emergencyButton; // The button to reset the suit
+    Solenoid solenoid;  // The solenoid to send air into the vest
 
-    Solenoid intakeSolenoid;  // The solenoid to send air into the vest
-
-    Solenoid outtakeSolenoid; // The solenoid to send air out of the vest
-    
     // Resets the state of the suit
     void ResetState();
 };

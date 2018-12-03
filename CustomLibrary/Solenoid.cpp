@@ -5,14 +5,12 @@ Solenoid::Solenoid()
 {
 }
 
-Solenoid::Solenoid(int solenoidPin, LED solenoidLED)
+Solenoid::Solenoid(int solenoidPin)
 {
     this->solenoidPin = solenoidPin;
     pinMode(this->solenoidPin, OUTPUT);
 
     this->isOpen = 0;
-
-    this->solenoidLED = solenoidLED;
 }
 
 void Solenoid::OpenSolenoid()
@@ -23,7 +21,6 @@ void Solenoid::OpenSolenoid()
     }
 
     digitalWrite(this->solenoidPin, HIGH);
-    this->solenoidLED.TurnOnLED();
     this->isOpen = 1;
 }
 
@@ -35,7 +32,6 @@ void Solenoid::CloseSolenoid()
     }
 
     digitalWrite(this->solenoidPin, LOW);
-    this->solenoidLED.TurnOffLED();
     this->isOpen = 0;
 }
 
@@ -47,7 +43,6 @@ int Solenoid::IsOpen()
 Solenoid& Solenoid::operator=(Solenoid other)
 {
     this->solenoidPin = other.solenoidPin;
-    this->solenoidLED = other.solenoidLED;
     this->isOpen = other.IsOpen();
     return *this;
 }

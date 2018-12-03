@@ -14,9 +14,7 @@ class Solenoid
         //
         // param: solenoidPin
         //          The pin that the solenoid is connected to
-        // param: solenoidLED
-        //          LED used to indicate if the solenoid is open or not
-        Solenoid(int solenoidPin, LED solenoidLED);
+        Solenoid(int solenoidPin);
 
         // Opens up the intake flow for the solenoid
         void OpenSolenoid();
@@ -31,8 +29,6 @@ class Solenoid
         Solenoid& operator=(Solenoid other);
 
     private:
-
-        LED solenoidLED;    // The LED used to indicate if the solenoid is open or not
 
         int solenoidPin;    // The pin the solenoid is connected to
 

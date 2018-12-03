@@ -3,16 +3,10 @@
 #include <Prototype.h>
 #include <Solenoid.h>
 
-int startButtonPin;
-int startButtonLEDPin;
+int startButtonPin = 2;
+int startButtonLEDPin = 5;
 
-int emergencyButtonPin;
-
-int intakeSolenoidPin;
-int intakeSolenoidLEDPin;
-
-int outtakeSolenoidPin;
-int outtakeSolenoidLEDPin;
+int solenoidPin = 9;
 
 Prototype prototype;
 
@@ -21,15 +15,9 @@ void setup()
   Button startButton = Button(startButtonPin);
   LED startButtonLED = LED(startButtonLEDPin);
 
-  Button emergencyButton = Button(emergencyButtonPin);
-
-  LED intakeSolenoidLED = LED(intakeSolenoidLEDPin);
-  Solenoid intakeSolenoid = Solenoid(intakeSolenoidPin, intakeSolenoidLED);
-
-  LED outtakeSolenoidLED = LED(outtakeSolenoidLEDPin);
-  Solenoid outtakeSolenoid = Solenoid(outtakeSolenoidPin, outtakeSolenoidLED);
+  Solenoid solenoid = Solenoid(solenoidPin);
   
-  prototype = Prototype(startButton,startButtonLED, emergencyButton, intakeSolenoid, outtakeSolenoid);
+  prototype = Prototype(startButton, startButtonLED, solenoid);
 }
 
 void loop() 
