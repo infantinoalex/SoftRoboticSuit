@@ -14,7 +14,7 @@
 MPU6050 mpu;
 
 int accelerometerLEDPin = 6;
-int startButtonPin = 4;
+int startButtonPin = 9;
 int startButtonLEDPin = 5;
 
 int solenoidPin = 11;
@@ -202,7 +202,8 @@ void loop()
     if (startButton.IsButtonPressed())
     {
       isStartButtonPressed = true;
-      accelerometerLED.TurnOnLED();
+      startButtonLED.TurnOnLED();
+      Serial.println("Start button TRIGGERED\n");
     }
     else if (isStartButtonPressed)
     {
@@ -214,7 +215,7 @@ void loop()
       if (accelerometerTriggered)
       {
         solenoid.OpenSolenoid();
-        startButtonLED.TurnOnLED();
+        accelerometerLED.TurnOnLED();
         delay(5000);
         solenoid.CloseSolenoid();
         isStartButtonPressed = false;
